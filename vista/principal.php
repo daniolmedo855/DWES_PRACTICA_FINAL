@@ -1,0 +1,11 @@
+<?php
+    require_once("inicio.html");
+    ?>
+<body>
+<?php
+    require_once("header.html");
+?>
+</body>
+<?php
+    require_once("fin.html");
+?>
