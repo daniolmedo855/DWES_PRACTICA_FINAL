@@ -6,19 +6,20 @@
 ?>
 <h2>Amigos</h2>
 <table>
-    <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Fecha Nacimiento</th>
-        <th></th>
-    </tr>
+    <?php
+        if(count($amigos) == 0){
+            echo '<tr><td>No hay amigos</td></tr>';
+        } else {
+            echo "<tr><th>Nombre</th><th>Apellido</th><th>Fecha Nacimiento</th></tr>";
+        }
+    ?>
         <?php
             foreach($amigos as $amigo){
                 echo '<tr>';
                 echo '<td>'.$amigo->__get("nombre").'</td>';
                 echo '<td>'.$amigo->__get("apellidos").'</td>';
                 echo '<td>'.cambiar_fecha($amigo->__get("fecha")).'</td>';
-                echo '<td><a href="index.php?action=modificar&id='.$amigo->__get("id").'">Modificar</a></td>';
+                echo '<td><a href="index.php?action=modificar_amigo&id='.$amigo->__get("id").'">Modificar</a></td>';
                 echo '</tr>';
             }
         ?>

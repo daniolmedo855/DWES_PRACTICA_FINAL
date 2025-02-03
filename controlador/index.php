@@ -63,7 +63,7 @@
     function insertar_amigo(){
         sesion();
         if(isset($_REQUEST["action"])){
-            if(isset($_REQUEST["nombre"]) && isset($_REQUEST["apellidos"]) && isset($_REQUEST["fecha"])){
+            if(isset($_REQUEST["nombre"])){
                 $bd = new amigos();
                 $bd->__set("usuario", $_SESSION["usuario"]);
                 $bd->__set("nombre", $_REQUEST["nombre"]);
@@ -92,6 +92,24 @@
                 require_once("../vista/buscar_amigo.php");
             }
         }
+    }
+
+    function modificar_amigo(){
+        sesion();
+        if(isset($_REQUEST["action"])){
+            if(isset($_REQUEST["nombre"])){
+                $bd = new amigos();
+                $bd->__set("id", $_REQUEST["id"]);
+                $bd->__set("nombre", $_REQUEST["nombre"]);
+                $bd->__set("apellidos", $_REQUEST["apellidos"]);
+                $fecha = explode("/", str_replace("-", "/", $_REQUEST["fecha"]));
+                $fecha= $fecha[2]."-".$fecha[1]."-".$fecha[0];
+                $bd->__set("fecha", $fecha);
+                $bd->modificar_amigo();
+                header("Location: index.php?action=amigos&acc=2");
+            }
+        }
+        require_once("../vista/modificar_amigo.php");
     }
 
 ?>
