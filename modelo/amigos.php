@@ -52,5 +52,25 @@
             $sentencia->close();
             return $amigos;
         }
+
+        public function get_amigo($id){
+            $sql = "SELECT * FROM amigos WHERE id = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id);
+            $sentencia->bind_result($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
+            $sentencia->execute();
+            $sentencia->fetch();
+            $amigo = new amigos($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
+            $sentencia->close();
+            return $amigo;
+        }
+
+        public function modificar_amigo(){
+            $sql = "UPDATE amigos SET nombre = ?, apellidos = ?, fecha = ? WHERE id = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("sssi", $this->nombre, $this->apellidos, $this->fecha, $this->id);
+            $sentencia->execute();
+            $sentencia->close();
+        }
     }
 ?>

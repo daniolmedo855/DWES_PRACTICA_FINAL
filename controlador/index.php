@@ -7,7 +7,7 @@
         $funcion();
     } else{
         require_once("../vista/inicio.html");
-        require_once("../vista/inicio_sesion.php");
+        require_once("../vista/login/inicio_sesion.php");
         require_once("../vista/fin.html");
     }
 
@@ -34,14 +34,14 @@
     }
 
     function inicio(){
-        require_once("../vista/principal.php");
+        require_once("../vista/login/principal.php");
     }
 
     function amigos(){
         sesion();
         $bd = new amigos();
         $amigos = $bd->get_amigos($_SESSION["usuario"]);
-        require_once("../vista/principal_amigos.php");
+        require_once("../vista/amigos/principal_amigos.php");
     }
 
     function salir(){
@@ -78,7 +78,7 @@
               
         }
 
-        require_once("../vista/insertar_amigo.php");
+        require_once("../vista/amigos/insertar_amigo.php");
     }
 
     function buscar_amigos(){
@@ -87,29 +87,29 @@
             if(isset($_REQUEST["buscar"])){
                 $bd = new amigos();
                 $amigos = $bd->buscar_amigo($_REQUEST["buscar"], $_SESSION["usuario"]);
-                require_once("../vista/principal_amigos.php");
+                require_once("../vista/amigos/principal_amigos.php");
             } else {
-                require_once("../vista/buscar_amigo.php");
+                require_once("../vista/amigos/buscar_amigo.php");
             }
         }
     }
 
     function modificar_amigo(){
         sesion();
-        if(isset($_REQUEST["action"])){
-            if(isset($_REQUEST["nombre"])){
-                $bd = new amigos();
+        $bd = new amigos();
+        if(isset($_GET["id"])){
+            $amigo=$bd->get_amigo($_GET["id"]);
+            require_once("../vista/amigos/modificar_amigo.php");
+        } else {
                 $bd->__set("id", $_REQUEST["id"]);
                 $bd->__set("nombre", $_REQUEST["nombre"]);
                 $bd->__set("apellidos", $_REQUEST["apellidos"]);
-                $fecha = explode("/", str_replace("-", "/", $_REQUEST["fecha"]));
+                $fecha = explode("-", $_REQUEST["fecha"]);
                 $fecha= $fecha[2]."-".$fecha[1]."-".$fecha[0];
                 $bd->__set("fecha", $fecha);
                 $bd->modificar_amigo();
                 header("Location: index.php?action=amigos&acc=2");
-            }
         }
-        require_once("../vista/modificar_amigo.php");
     }
 
 ?>
