@@ -33,7 +33,7 @@
     }
     if(isset($_GET["err"])){
         if($_GET["err"] == 1){
-            echo '<p style="color:red">Formato de fecha Incorrecto</p>';
+            echo '<p style="color:red">Fecha Incorrecto</p>';
             header("refresh: 2; url= ../controlador/index.php?action=amigos");
         }
     }

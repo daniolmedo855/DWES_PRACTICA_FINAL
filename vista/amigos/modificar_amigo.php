@@ -14,7 +14,7 @@
     <label for="apellidos">Apellidos:</label>
     <input type="text" name="apellidos" id="apellidos" value="<?php echo $amigo->__get("apellidos");?>" required>
     <label for="fecha">Fecha Nacimiento:</label>
-    <input type="text" name="fecha" id="fecha" value="<?php echo cambiar_fecha($amigo->__get("fecha"));?>" required>
+    <input type="date" name="fecha" id="fecha" value="<?php echo $amigo->__get("fecha"); ?>" required>
     <input type="submit" name="enviar" value="Enviar">
 </form>
 <a href="../controlador/index.php?action=amigos">Volver</a>

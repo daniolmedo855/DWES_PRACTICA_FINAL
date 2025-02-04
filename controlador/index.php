@@ -2,6 +2,7 @@
     require_once("../modelo/usuarios.php");
     require_once("../modelo/amigos.php");
     require_once("../modelo/juegos.php");
+    require_once("../modelo/prestamos.php");
 
     if(isset($_REQUEST["action"])){ 
         $funcion = strtolower(trim($_REQUEST["action"]));
@@ -53,14 +54,12 @@
         sesion();
         if(isset($_REQUEST["action"])){
             if(isset($_REQUEST["enviar"])){
-                if(comprobar_fecha($_REQUEST["fecha"])){
+                if(comprobar_fecha_hoy($_REQUEST["fecha"])){
                     $bd = new amigos();
                     $bd->__set("usuario", $_SESSION["usuario"]);
                     $bd->__set("nombre", $_REQUEST["nombre"]);
                     $bd->__set("apellidos", $_REQUEST["apellidos"]);
-                    $fecha = explode("-", $_REQUEST["fecha"]);
-                    $fecha= $fecha[2]."-".$fecha[1]."-".$fecha[0];
-                    $bd->__set("fecha", $fecha);
+                    $bd->__set("fecha", $_REQUEST["fecha"]);
                     $bd->insertar_amigo();
                     header("Location: index.php?action=amigos&acc=1"); 
                 } else {
@@ -87,19 +86,16 @@
     }
 
     function modificar_amigo(){
-        sesion();
         $bd = new amigos();
         if(isset($_GET["id"])){
             $amigo=$bd->get_amigo($_GET["id"]);
             require_once("../vista/amigos/modificar_amigo.php");
         } else {
-                if(comprobar_fecha($_REQUEST["fecha"])){
+                if(comprobar_fecha_hoy($_REQUEST["fecha"])){
                     $bd->__set("id", $_REQUEST["id"]);
                     $bd->__set("nombre", $_REQUEST["nombre"]);
                     $bd->__set("apellidos", $_REQUEST["apellidos"]);
-                    $fecha = explode("-", $_REQUEST["fecha"]);
-                    $fecha= $fecha[2]."-".$fecha[1]."-".$fecha[0];
-                    $bd->__set("fecha", $fecha);
+                    $bd->__set("fecha", $_REQUEST["fecha"]);
                     $bd->modificar_amigo();
                     header("Location: index.php?action=amigos&acc=2");
                 } else {
@@ -151,7 +147,6 @@
     }
 
     function modificar_juego(){
-        sesion();
         $bd = new juegos();
         if(isset($_GET["id"])){
             $juego=$bd->get_juego($_GET["id"]);
@@ -171,16 +166,74 @@
         }
     }
 
-    //FUNCIONES
-
-    function cambiar_fecha($fecha){
-        $fecha = explode("-", $fecha);
-        $fecha_nueva = $fecha[2]."-".$fecha[1]."-".$fecha[0];
-        return $fecha_nueva;
+    //PRESTAMOS
+    function prestamos(){
+        sesion();
+        $bd = new prestamos();
+        $prestamos = $bd->get_prestamos_usuario($_SESSION["usuario"]);
+        require_once("../vista/prestamos/principal_prestamos.php");
     }
 
-    function comprobar_fecha($fecha){
-        return preg_match("'^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-([0-9]{4})$'", $fecha);
+    function insertar_prestamo(){
+        sesion();
+        if(isset($_REQUEST["action"])){
+            if(isset($_REQUEST["enviar"])){
+                if(comprobar_fecha_hoy($_REQUEST["fecha"])){
+                    $bd = new prestamos();
+                    $bd->__set("usuario", $_SESSION["usuario"]);
+                    $bd->__set("amigo", $_REQUEST["amigo"]);
+                    $bd->__set("juego", $_REQUEST["juego"]);
+                    $bd->__set("fecha_prestamo", $_REQUEST["fecha"]);
+                    $bd->insertar_prestamo();
+                    header("Location: index.php?action=prestamos&acc=1"); 
+                } else {
+                    header("Location: index.php?action=prestamos&err=1"); 
+                }
+                
+                
+            } else {
+                $bd_prestamos = new prestamos();
+                $bd_amigos = new amigos();
+                $juegos=$bd_prestamos->get_prestamos_usuario_juego($_SESSION["usuario"]);
+                $amigos=$bd_amigos->get_amigos_usuario($_SESSION["usuario"]);
+                require_once("../vista/prestamos/insertar_prestamo.php");
+
+            }
+        }
+    }
+
+    function buscar_prestamo(){
+        sesion();
+        if(isset($_REQUEST["action"])){
+            if(isset($_REQUEST["enviar"])){
+                $bd = new prestamos();
+                $prestamos = $bd->buscar_prestamo($_REQUEST["buscar"], $_SESSION["usuario"]);
+                require_once("../vista/prestamos/principal_prestamos.php");
+            } else {
+                require_once("../vista/prestamos/buscar_prestamo.php");
+            }
+        }
+    }
+
+    function devolver_prestamo(){
+        if(isset($_GET["id"])){
+            $bd = new prestamos();
+            $bd->devolver_prestamo($_GET["id"]);
+            header("Location: index.php?action=prestamos&acc=2");
+        }
+    }
+
+    //FUNCIONES
+    function cambiar_fecha($fecha){
+        $fecha = explode("-", $fecha);
+        $toRet=$fecha[2]."-".$fecha[1]."-".$fecha[0];
+        return $toRet;
+    }
+
+    function comprobar_fecha_hoy($fecha){
+        $hoy = strtotime("today");
+        $fecha = strtotime($fecha);
+        return $fecha>=$hoy;
     }
 
     function salir(){

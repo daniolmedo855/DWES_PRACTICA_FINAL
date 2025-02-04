@@ -11,7 +11,7 @@
     <label for="apellidos">Apellidos:</label>
     <input type="text" name="apellidos" id="apellidos" required>
     <label for="fecha">Fecha Nacimiento:</label>
-    <input type="text" name="fecha" id="fecha" required placeholder="dd-mm-aaaa">
+    <input type="date" name="fecha" id="fecha" required>
     <input type="submit" name="enviar" value="Enviar">
 </form>
 <a href="../controlador/index.php?action=amigos">Volver</a>
