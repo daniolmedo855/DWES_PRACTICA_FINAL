@@ -16,6 +16,21 @@
         }
 
         function get_amigos($usuario){
+            $sql = "SELECT * FROM amigos";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $usuario);
+            $sentencia->bind_result($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
+            $sentencia->execute();
+            $amigos = array();
+            while($sentencia->fetch()){
+                $amigo = new amigos($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
+                array_push($amigos, $amigo);
+            }
+            $sentencia->close();
+            return $amigos;
+        }
+
+        function get_amigos_usuario($usuario){
             $sql = "SELECT * FROM amigos WHERE usuario = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $usuario);
@@ -39,9 +54,10 @@
         }
 
         public function buscar_amigo($nombre, $usuario){
-            $sql = "SELECT * FROM amigos WHERE usuario = ? and (nombre = ? or apellidos = ?)";
+            $sql = "SELECT * FROM amigos WHERE usuario = ? and (nombre like ? or apellidos like ?)";
             $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("iss",$usuario, $nombre, $nombre);
+            $buscar = "%".$nombre."%";
+            $sentencia->bind_param("iss", $usuario, $buscar, $buscar);
             $sentencia->bind_result($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
             $sentencia->execute();
             $amigos = array();

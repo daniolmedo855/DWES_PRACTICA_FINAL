@@ -1,9 +1,9 @@
 <?php
-    require_once("../inicio.html");
+    require_once("../vista/inicio.html");
     ?>
 <body>
 <?php
-    require_once("../header.html");
+    require_once("../vista/header.html");
     require_once("header_amigos.html");
 ?>
 <form action="../controlador/index.php" method="POST">
@@ -15,9 +15,9 @@
     <input type="text" name="apellidos" id="apellidos" value="<?php echo $amigo->__get("apellidos");?>" required>
     <label for="fecha">Fecha Nacimiento:</label>
     <input type="text" name="fecha" id="fecha" value="<?php echo cambiar_fecha($amigo->__get("fecha"));?>" required>
-    <input type="submit" value="Enviar">
+    <input type="submit" name="enviar" value="Enviar">
 </form>
-<a href="../../controlador/index.php?action=amigos">Volver</a>
+<a href="../controlador/index.php?action=amigos">Volver</a>
 <?php
-    require_once("../fin.html");
+    require_once("../vista/fin.html");
 ?>

@@ -1,10 +1,10 @@
 <?php
     require_once("bd.php");
     class usuarios extends BD{
-        private $id;
-        private $nombre;
-        private $contrasenia;
-        private $admin;
+        protected $id;
+        protected $nombre;
+        protected $contrasenia;
+        protected $admin;
 
         public function __construct($id=null, $nombre=null, $contrasenia=null, $admin=null){
             parent::__construct();

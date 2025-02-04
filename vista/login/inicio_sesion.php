@@ -1,7 +1,7 @@
-<?php require_once("../inicio.html");?>
+<?php require_once("../vista/inicio.html");?>
 <body>
     <h1>Inicio de sesion</h1>
-    <form action="index.php" method="POST">
+    <form action="../controlador/index.php" method="POST">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre"
         <?php
@@ -32,4 +32,4 @@
         <input type="submit" name="action" value="Iniciar"><br>
     </form>
 </body>
-<?php require_once("fin.html");?>
+<?php require_once("../vista/fin.html");?>
