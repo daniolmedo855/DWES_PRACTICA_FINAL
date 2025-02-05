@@ -7,7 +7,67 @@ img{
     width: 100px;
 }
 
-h2{
+h2, h3{
     text-align: center;
 }
 
+body{
+    min-height: 100vh;
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+}
+
+div.form{
+    margin: auto;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
+
+    h2{
+        text-align: center;
+
+    }
+
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2% 0;
+    background-color: yellow;
+}
+
+.header+.header{
+    display: flex;
+    justify-content: end;
+    background-color: brown;
+}
+
+.menu{
+    width: 60%;
+    margin: 0 auto;
+}
+
+table{
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    th{
+        background-color: grey;
+        color: white;
+    }
+
+    tr{
+        border-bottom: solid 1px black;
+    }
+}
