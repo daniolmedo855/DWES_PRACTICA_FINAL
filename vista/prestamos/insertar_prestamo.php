@@ -28,7 +28,7 @@
         </select>
         <label for="fecha">Fecha de devolucion:</label>
         <input type="date" name="fecha" id="fecha" required>
-        <input type="submit" name="enviar" value="Enviar">
+        <input type="submit" name="enviar" value="Enviar" class="boton">
     </form>
     <a href="../controlador/index.php?action=prestamos" class="boton">Volver</a>
 </div>

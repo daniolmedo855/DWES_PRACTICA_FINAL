@@ -18,6 +18,7 @@ body{
 
 a{
     text-decoration: none;
+    color: black;
 }
 
 ul{
@@ -25,10 +26,10 @@ ul{
     display: flex;
 }
 
-div.form{
+.form{
+    width: 50%;
     margin: auto;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-
 
     h2{
         text-align: center;
@@ -37,20 +38,91 @@ div.form{
 
 }
 
+.inicio_sesion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    >div{
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 5% 6%;
+        border-radius: 50px;
+    }
+
+    h2{
+        margin-bottom: 10%;
+        font-size: 2rem;
+    }
+
+    form{
+        input{
+            padding: 5px 0;
+            margin: 1% 0;
+            width: 100%;
+            outline: none;
+        }
+        input:focus{
+            background-color: rgb(226, 226, 226);
+        }
+        input[type="checkbox"]{
+            width: auto;
+            margin-left: 2%;
+        }
+        input[type="submit"]{
+            display: block;
+            margin: 0 auto;
+            margin-top: 10%;
+            width: auto;
+        }
+        >div{
+            display: flex;
+        }
+    }
+}
+
+.boton, input[type="submit"].boton{
+    padding: 5px 10px;
+    background-color: transparent;
+    border: solid 1px black;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.boton:hover, input[type="submit"].boton:hover{
+    background-color: black;
+    color: white;
+}
+
+
 .header{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
     padding: 2% 0;
-    background-color: yellow;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    
+    >div{
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        >ul{
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        >h3{
+            font-size: 2rem;
+            color: lightblue;
+        }
+    }
+    
 }
 
 .header+.header{
     display: flex;
     justify-content: end;
-    background-color: brown;
 }
 
 .menu{
