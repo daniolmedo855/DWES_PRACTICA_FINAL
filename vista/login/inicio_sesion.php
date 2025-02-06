@@ -1,5 +1,4 @@
 <?php require_once("../vista/inicio.html");?>
-<body>
     <div class="inicio_sesion">
         <div>
             <h2>Inicio de sesion</h2>
@@ -37,7 +36,5 @@
                 <input type="submit" name="action" value="Iniciar" class="boton">
             </form>
         </div>
-    </div>
-        
-</body>
-<?php require_once("../vista/fin.html");?>
+    </body>
+</html>>
