@@ -2,18 +2,18 @@
 <div>
     <?php
         require_once("../vista/header.php");
-        require_once("header_amigos.html");
+        require_once("header_usuarios.html");
     ?>
 </div>
 <div class="form">
-    <h3>Buscar Amigo</h3>
+    <h3>Buscar Usuario</h3>
     <form action="../controlador/index.php" method="POST">
-        <input type="hidden" name="action" value="buscar_amigo">
-        <label for="buscar">Nombre del amigo/Apellidos del amigo</label>
+        <input type="hidden" name="action" value="buscar_usuario">
+        <label for="buscar">Nombre de Usuario</label>
         <input type="text" name="buscar" id="buscar" required>
         <div>
             <input type="submit" name="enviar" value="Enviar">
-            <a href="../controlador/index.php?action=amigos" class="boton">Volver</a>
+            <a href="../controlador/index.php?action=usuarios" class="boton">Volver</a>
         </div>
     </form>
 </div>

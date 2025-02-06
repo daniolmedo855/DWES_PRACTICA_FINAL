@@ -15,10 +15,9 @@
             $this->fecha = $fecha;
         }
 
-        function get_amigos($usuario){
-            $sql = "SELECT * FROM amigos";
+        function get_amigos(){
+            $sql = "SELECT * FROM amigos order by usuario";
             $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("i", $usuario);
             $sentencia->bind_result($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
             $sentencia->execute();
             $amigos = array();
@@ -53,11 +52,20 @@
             $sentencia->close();
         }
 
-        public function buscar_amigo($nombre, $usuario){
-            $sql = "SELECT * FROM amigos WHERE usuario = ? and (nombre like ? or apellidos like ?)";
+        public function buscar_amigo($nombre, $usuario=null){
+            if($usuario==null){
+                $sql = "SELECT * FROM amigos WHERE nombre like ? or apellidos like ?";
+                
+            } else {
+                $sql = "SELECT * FROM amigos WHERE usuario = ? and (nombre like ? or apellidos like ?)";
+            }
             $sentencia = $this->bd->prepare($sql);
             $buscar = "%".$nombre."%";
-            $sentencia->bind_param("iss", $usuario, $buscar, $buscar);
+            if($usuario == null){
+                $sentencia->bind_param("ss", $buscar, $buscar);
+            } else {
+                $sentencia->bind_param("iss", $usuario, $buscar, $buscar);
+            }
             $sentencia->bind_result($this->id, $this->usuario, $this->nombre, $this->apellidos, $this->fecha);
             $sentencia->execute();
             $amigos = array();
@@ -82,9 +90,9 @@
         }
 
         public function modificar_amigo(){
-            $sql = "UPDATE amigos SET nombre = ?, apellidos = ?, fecha = ? WHERE id = ?";
+            $sql = "UPDATE amigos SET nombre = ?, apellidos = ?, fecha = ?, usuario = ? WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("sssi", $this->nombre, $this->apellidos, $this->fecha, $this->id);
+            $sentencia->bind_param("sssii", $this->nombre, $this->apellidos, $this->fecha, $this->usuario, $this->id);
             $sentencia->execute();
             $sentencia->close();
         }

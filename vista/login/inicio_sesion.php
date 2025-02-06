@@ -12,7 +12,7 @@
                     }
                 ?>required>
 
-                <label for="contrasenia">Contrasenia:</label><br>
+                <label for="contrasenia">Contraseña:</label><br>
                 <input type="password" name="contraseña" id="contrasenia" required>
                 <div>
                     <label for="recordar">Recordar</label>

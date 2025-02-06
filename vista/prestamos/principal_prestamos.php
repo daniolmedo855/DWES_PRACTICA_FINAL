@@ -1,10 +1,12 @@
 <?php
     require_once("../vista/inicio.html");
 ?>
-<?php
-    require_once("../vista/header.html");
-    require_once("header_prestamos.html");
-?>
+<div>
+    <?php
+        require_once("../vista/header.php");
+        require_once("header_prestamos.html");
+    ?>
+</div>
 <div class="menu">
     <h2>Prestamos</h2>
     <table>
@@ -31,9 +33,7 @@
                 echo "</td>";
                 echo "<td>";
                 if($prestamo["devuelto"] == 0){
-                    echo "<a href='../controlador/index.php?action=devolver_prestamo&id=".$prestamo["id"]." class='boton'>Devolver</a>";
-                } else {
-                    echo "Devolver";
+                    echo "<a href='../controlador/index.php?action=devolver_prestamo&id=".$prestamo["id"]."' class='boton'>Devolver</a>";
                 }
                 echo "</td>";
                 echo "</tr>";
@@ -59,7 +59,6 @@
         }
     ?>
 </div>
-</body>
 <?php
     require_once("../vista/fin.html");
 ?>

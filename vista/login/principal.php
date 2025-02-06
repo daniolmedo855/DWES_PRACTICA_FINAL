@@ -1,9 +1,11 @@
 <?php
     require_once("../vista/inicio.html");
     ?>
-<?php
-    require_once("../vista/header.html");
-?>
+<div>
+    <?php
+        require_once("../vista/header.php");
+    ?>
+</div>
 <?php
     require_once("../vista/fin.html");
 ?>
