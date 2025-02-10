@@ -73,7 +73,11 @@
             if(isset($_REQUEST["enviar"])){
                 if(comprobar_fecha_hoy($_REQUEST["fecha"])){ //compruebo que la fecha no es mayor a hoy, si es correcto hago el insert y redirecciono con un acierto, sino no se inserta y redirecciono con un error
                     $bd = new amigos();
-                    $bd->__set("usuario", $_SESSION["usuario"]);
+                    if($_SESSION["admin"]==1){ //si es admin el dueño lo determina el admin, si no sera el de la session
+                        $bd->__set("usuario", $_REQUEST["usuario"]);
+                    } else  {
+                        $bd->__set("usuario", $_SESSION["usuario"]);
+                    }
                     $bd->__set("nombre", $_REQUEST["nombre"]);
                     $bd->__set("apellidos", $_REQUEST["apellidos"]);
                     $bd->__set("fecha", $_REQUEST["fecha"]);
