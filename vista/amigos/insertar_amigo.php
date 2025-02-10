@@ -19,6 +19,7 @@
             if($_SESSION["admin"]==1){
                 echo '<label for="usuario">Usuario:</label><br>';
                 echo '<select name="usuario" id="usuario" required>';
+                echo '<option value="" selected disabled>--Seleccionar usuario--</option>';
                 foreach($usuarios as $usuario){
                     echo '<option value="'.$usuario->get_id($usuario->__get("nombre")).'">'.$usuario->__get("nombre").'</option>';
                 }
