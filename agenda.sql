@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-02-2025 a las 13:06:50
+-- Tiempo de generación: 10-02-2025 a las 12:25:38
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -41,7 +41,7 @@ CREATE TABLE `amigos` (
 
 INSERT INTO `amigos` (`id`, `usuario`, `nombre`, `apellidos`, `fecha`) VALUES
 (1, 6, 'Hola', 'Adios', '2011-06-02'),
-(3, 2, 'Sofia', 'Gomezs', '1995-07-30'),
+(3, 2, 'Sofia', 'Gomez', '1995-08-05'),
 (4, 3, 'Raul', 'Fernandez', '1992-11-10'),
 (5, 2, 'Luis', 'Sanchez', '1993-03-25'),
 (6, 3, 'Elena', 'Torres', '1997-06-18'),
@@ -80,8 +80,10 @@ INSERT INTO `amigos` (`id`, `usuario`, `nombre`, `apellidos`, `fecha`) VALUES
 (47, 9, 'Oscar', 'Iglesias', '1992-12-24'),
 (48, 9, 'Elena', 'Vargas', '1995-09-09'),
 (49, 10, 'Hector', 'Paredes', '1991-02-13'),
-(50, 10, 'Silvia', 'Fuentes', '1996-07-17'),
-(53, 2, 'Sofia', '123', '2025-02-05');
+(50, 17, 'Silvia', 'Fuentes', '1996-07-17'),
+(53, 2, 'Sofia', '123', '2025-02-05'),
+(55, 2, 'prueba', 'prueba', '2025-02-05'),
+(56, 2, 'prueba', 'prueba', '2025-02-01');
 
 -- --------------------------------------------------------
 
@@ -112,8 +114,7 @@ INSERT INTO `juegos` (`id`, `usuario`, `titulo`, `plataforma`, `anio`, `imagen`)
 (59, 8, 'Gran Turismo 7', 'PlayStation 5', '2022', 'gran_turismo_7.jpg'),
 (60, 9, 'Red Dead Redemption 2', 'PlayStation 4', '2018', 'rdr_2.jpg'),
 (61, 10, 'Animal Crossing: New Horizons', 'Nintendo Switch', '2020', 'animal_crossing.jpg'),
-(62, 2, 'Call of Duty: Warzone', 'PC', '2020', '../img/21.jpg'),
-(63, 2, 'prueba', 'prueba1', '2111', '../img/19.jpg');
+(62, 2, 'Call of Duty: Warzone', 'PC', '2020', '../img/21.jpg');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,10 @@ CREATE TABLE `prestamos` (
 
 INSERT INTO `prestamos` (`id`, `usuario`, `amigo`, `juego`, `fecha_prestamo`, `devuelto`) VALUES
 (161, 2, 3, 62, '2025-02-15', 1),
-(162, 2, 5, 62, '2025-02-08', 0);
+(162, 2, 5, 62, '2025-02-08', 1),
+(163, 2, 3, 53, '2025-02-11', 0),
+(164, 2, 5, 62, '2025-02-10', 1),
+(165, 2, 5, 62, '2025-02-10', 0);
 
 -- --------------------------------------------------------
 
@@ -175,8 +179,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `contrasenia`, `admin`) VALUES
 (17, 'Cristian', 'cristian456', 0),
 (18, 'Natalia', 'natalia789', 0),
 (19, 'Alberto', 'albertopass', 0),
-(20, 'Patricia', 'patricia123', 0),
-(40, 'asdasd', 'aaa', 0);
+(20, 'Patricia', 'patricia123', 0);
 
 --
 -- Índices para tablas volcadas
@@ -224,25 +227,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `amigos`
 --
 ALTER TABLE `amigos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Restricciones para tablas volcadas

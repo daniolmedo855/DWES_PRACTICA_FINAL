@@ -30,16 +30,23 @@
     <?php
         if(isset($_GET["acc"])){
             if($_GET["acc"] == 1){
-                echo '<p style="color:green">Juego insertado correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Juego insertado correctamente</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=juegos");
             }
             if($_GET["acc"] == 2){
-                echo '<p style="color:green">Juego modificado correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Juego modificado correctamente</p></div>';
+                header("refresh: 2; url= ../controlador/index.php?action=juegos");
+            }
+        }
+        if(isset($_GET["err"])){
+            if($_GET["err"] == 1){
+                echo '<div class="mensaje"><p style="color:red">Fecha no Valida</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=juegos");
             }
         }
     ?>
 </div>
 <?php
+    require_once("../vista/footer.html");
     require_once("../vista/fin.html");
 ?>

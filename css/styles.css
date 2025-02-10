@@ -216,3 +216,14 @@ footer{
     text-align: center;
     color: white;
 }
+
+div.mensaje{
+    position: fixed;
+    padding: 50px;
+    border: solid 1px black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}

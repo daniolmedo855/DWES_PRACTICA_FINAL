@@ -18,10 +18,10 @@
             $this->devuelto = $devuelto;
         }
 
-        public function get_prestamos(){
+        public function get_prestamos(){ //return de todos los prestamos
             $prestamos = array();
 
-            $sql = "SELECT * FROM prestamos";
+            $sql = "SELECT * FROM prestamos order by fecha_prestamo";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_result($this->id, $this->usuario, $this->amigo, $this->juego, $this->fecha_prestamo, $this->devuelto);
             $sentencia->execute();
@@ -36,9 +36,9 @@
             return $prestamos;
         }
 
-        public function get_prestamos_usuario($usuario){
+        public function get_prestamos_usuario($usuario){ //return de todos los prestamos de un usuario en un array
             $prestamos = array();
-
+            //como busco variables que no tiene prestamos no puedo usar el objeto prestamos, por eso devuelvo una matriz con arrays asociativo en vez de un array de objetos
             $id=0;
             $nombre_amigo="";
             $nombre_usuario="";
@@ -47,7 +47,7 @@
             $fecha="";
             $devuelto="";
             
-            $sql = "SELECT prestamos.id, amigos.nombre, usuarios.nombre as usuario_nom, juegos.titulo, juegos.imagen, prestamos.fecha_prestamo, prestamos.devuelto FROM prestamos JOIN amigos on amigos.id=prestamos.amigo JOIN juegos on juegos.id=prestamos.juego JOIN usuarios on usuarios.id=prestamos.usuario WHERE prestamos.usuario = ?";
+            $sql = "SELECT prestamos.id, amigos.nombre, usuarios.nombre as usuario_nom, juegos.titulo, juegos.imagen, prestamos.fecha_prestamo, prestamos.devuelto FROM prestamos JOIN amigos on amigos.id=prestamos.amigo JOIN juegos on juegos.id=prestamos.juego JOIN usuarios on usuarios.id=prestamos.usuario WHERE prestamos.usuario = ? order by fecha_prestamo DESC";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $usuario);
             $sentencia->bind_result($id, $nombre_amigo, $nombre_usuario, $titulo, $imagen, $fecha, $devuelto);
@@ -71,7 +71,7 @@
             return $prestamos;
         }
 
-        public function get_prestamos_usuario_juego($usuario){
+        public function get_prestamos_usuario_juego($usuario){ //return de todos los prestamos de un usuario en un array
             $juegos = array();
             
             $id=0;
@@ -95,7 +95,7 @@
             return $juegos;
         }
 
-        public function insertar_prestamo(){
+        public function insertar_prestamo(){ //inserta un prestamo
             $sql = "INSERT INTO prestamos (usuario, amigo, juego, fecha_prestamo) VALUES (?, ?, ?, ?)";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("iiis", $this->usuario, $this->amigo, $this->juego, $this->fecha_prestamo);
@@ -103,7 +103,7 @@
             $sentencia->close();
         }
 
-        public function buscar_prestamo($busqueda, $usuario){
+        public function buscar_prestamo($busqueda, $usuario){ //return de todos los prestamos de un usuario en un array con un filtro
             $prestamos = array();
 
             $id=0;
@@ -115,7 +115,7 @@
             $devuelto=0;
             $busqueda = "%".$busqueda."%";
             
-            $sql = "SELECT prestamos.id, amigos.nombre, usuarios.nombre as usuario_nom, juegos.titulo, juegos.imagen, prestamos.fecha_prestamo, prestamos.devuelto FROM prestamos JOIN amigos on amigos.id=prestamos.amigo JOIN juegos on juegos.id=prestamos.juego JOIN usuarios on usuarios.id=prestamos.usuario WHERE prestamos.usuario = ? AND (amigos.nombre like ? or juegos.titulo like ?)";
+            $sql = "SELECT prestamos.id, amigos.nombre, usuarios.nombre as usuario_nom, juegos.titulo, juegos.imagen, prestamos.fecha_prestamo, prestamos.devuelto FROM prestamos JOIN amigos on amigos.id=prestamos.amigo JOIN juegos on juegos.id=prestamos.juego JOIN usuarios on usuarios.id=prestamos.usuario WHERE prestamos.usuario = ? AND (amigos.nombre like ? or juegos.titulo like ?) order by fecha_prestamo DESC";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("iss", $usuario, $busqueda, $busqueda);
             $sentencia->bind_result($id, $nombre_amigo, $nombre_usuario, $titulo, $imagen, $fecha, $devuelto);
@@ -139,7 +139,7 @@
             return $prestamos;
         }
 
-        public function devolver_prestamo($id){
+        public function devolver_prestamo($id){ //estable devuelto = true para un prestamo
             $sql = "UPDATE prestamos SET devuelto = 1 WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $id);

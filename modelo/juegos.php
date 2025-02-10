@@ -18,7 +18,7 @@
             $this->imagen = $imagen;
         }
 
-        public function get_juegos(){
+        public function get_juegos(){ //devuelve todos los juegos
             $juegos = array();
 
             $sql = "SELECT * FROM juegos";
@@ -36,7 +36,7 @@
             return $juegos;
         }
 
-        public function get_juegos_usuario($usuario){
+        public function get_juegos_usuario($usuario){ //devuelve todos los juegos de un usuario
             $juegos = array();
 
             $sql = "SELECT * FROM juegos WHERE usuario = ?";
@@ -55,7 +55,7 @@
             return $juegos;
         }
 
-        public function insertar_juego(){
+        public function insertar_juego(){ //inserta un juego
             $sql = "INSERT INTO juegos (usuario, titulo, plataforma, anio, imagen) VALUES (?, ?, ?, ?, ?)";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("issis", $this->usuario, $this->titulo, $this->plataforma, $this->anio, $this->imagen);
@@ -63,7 +63,7 @@
             $sentencia->close();
         }
 
-        public function buscar_juego($titulo, $usuario){
+        public function buscar_juego($titulo, $usuario){ //return de array de juegos con un filtro
             $sql = "SELECT * FROM juegos WHERE usuario = ? and (titulo like ? or plataforma like ?)";
             $sentencia = $this->bd->prepare($sql);
             $buscar = "%".$titulo."%";
@@ -79,7 +79,7 @@
             return $juegos;
         }
 
-        public function get_juego($id){
+        public function get_juego($id){ //return de un juego dando un id
             $sql = "SELECT * FROM juegos WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $id);
@@ -91,7 +91,7 @@
             return $juego;
         }
 
-        public function get_imagen($id){
+        public function get_imagen($id){ //return de la imagen dando un id
             $sql = "SELECT imagen FROM juegos WHERE id = ?";
             $imagen = "";
             $sentencia = $this->bd->prepare($sql);
@@ -103,7 +103,7 @@
             return $imagen;
         }
 
-        public function modificar_juego(){
+        public function modificar_juego(){ //modifica un juego
             $sql = "UPDATE juegos SET titulo = ?, plataforma = ?, anio = ?, imagen = ? WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("ssssi", $this->titulo, $this->plataforma, $this->anio, $this->imagen, $this->id);

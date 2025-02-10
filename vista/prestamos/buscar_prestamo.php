@@ -13,7 +13,7 @@
         <input type="text" name="buscar" id="buscar" required>
         <div>
             <input type="submit" name="enviar" value="Enviar">
-            <a href="../controlador/index.php?action=amigos" class="boton">Volver</a>
+            <a href="../controlador/index.php?action=prestamos" class="boton">Volver</a>
         </div>
     </form>
 </div>

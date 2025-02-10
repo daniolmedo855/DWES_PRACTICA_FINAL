@@ -6,5 +6,6 @@
         require_once("../vista/header.php");
     ?>
 </div>
-</body>
-</html>
+<?php 
+    require_once("../vista/fin.html");
+?>

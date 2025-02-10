@@ -10,17 +10,17 @@
     <?php
         if(isset($_GET["acc"])){
             if($_GET["acc"] == 1){
-                echo '<p style="color:green">Amigo insertado correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Amigo insertado correctamente</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=amigos");
             }
             if($_GET["acc"] == 2){
-                echo '<p style="color:green">Amigo modificado correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Amigo modificado correctamente</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=amigos");
             }
         }
         if(isset($_GET["err"])){
             if($_GET["err"] == 1){
-                echo '<p style="color:red">Fecha no Valida</p>';
+                echo '<div class="mensaje"><p style="color:red">Fecha no Valida</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=amigos");
             }
         }
@@ -53,4 +53,7 @@
     </table>
     
 </div>
-<?php require_once("../vista/fin.html");?>
+<?php 
+    require_once("../vista/footer.html");
+    require_once("../vista/fin.html");
+    ?>

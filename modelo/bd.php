@@ -1,6 +1,7 @@
 <?php
 require_once("../../../cred.php");
 class BD {
+    //Todas las variables son protected para los metodos generales como __get() o __set()
     protected $bd;
 
     public function __construct() {

@@ -27,11 +27,11 @@
                 }
             ?>
         </select>
-        <label for="fecha">Fecha de devolucion:</label><br>
-        <input type="date" name="fecha" id="fecha" required>
+        <label for="fecha">Fecha de prestamo:</label><br>
+        <input type="date" name="fecha" id="fecha" required value='<?php echo date("Y-m-d", strtotime("today"))?>'> 
         <div>
             <input type="submit" name="enviar" value="Enviar">
-            <a href="../controlador/index.php?action=amigos" class="boton">Volver</a>
+            <a href="../controlador/index.php?action=prestamos" class="boton">Volver</a>
         </div>
     </form>
 </div>

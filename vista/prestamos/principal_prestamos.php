@@ -43,22 +43,23 @@
     <?php
         if(isset($_GET["acc"])){
             if($_GET["acc"] == 1){
-                echo '<p style="color:green">Prestamo insertado correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Prestamo insertado correctamente</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=prestamos");
             }
             if($_GET["acc"] == 2){
-                echo '<p style="color:green">Prestamo devuelto correctamente</p>';
+                echo '<div class="mensaje"><p style="color:green">Prestamo devuelto correctamente</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=prestamos");
             }
         }
-        if(isset($_GET["error"])){
-            if($_GET["error"] == 1){
-                echo '<p style="color:red">Fecha para el prestamo no valida</p>';
+        if(isset($_GET["err"])){
+            if($_GET["err"] == 1){
+                echo '<div class="mensaje"><p style="color:red">Fecha para el prestamo no valida</p></div>';
                 header("refresh: 2; url= ../controlador/index.php?action=prestamos");
             }
         }
     ?>
 </div>
 <?php
+    require_once("../vista/footer.html");
     require_once("../vista/fin.html");
 ?>

@@ -12,7 +12,7 @@
             $this->contrasenia = $contrasenia;
         }
 
-        public function get_usuarios(){
+        public function get_usuarios(){ //me devuelve todos los usuarios que no sean admin en un array 
             $usuarios = array();
 
             $sql = "SELECT * FROM usuarios WHERE admin = 0";
@@ -30,7 +30,7 @@
             return $usuarios;
         }
 
-        public function get_id($usuario){
+        public function get_id($usuario){ //Return de un id dando un nombre
             $sql = "SELECT id FROM usuarios WHERE nombre = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("s", $usuario);
@@ -41,7 +41,7 @@
             return $this->id;
         }
 
-        public function get_nombre($id){
+        public function get_nombre($id){ //Return de un nombre dando un id
             $sql = "SELECT nombre FROM usuarios WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $id);
@@ -52,17 +52,19 @@
             return $this->nombre;
         }
 
-        public function inicio_sesion($usuario, $contrasenia){
+        public function inicio_sesion($usuario, $contrasenia){ //comprueba los credenciales de inicio de sesion, retorna true o false
             $toRet=false;
-            $sql = "SELECT nombre, contrasenia FROM usuarios WHERE nombre = ? AND contrasenia = ?";
+            $sql = "SELECT nombre, contrasenia FROM usuarios where nombre = ?"; //obtengo el nombre y contraseña del usuario, lo hago asi para que la contraseña sea case sensitive
             $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("ss", $usuario, $contrasenia);
+            $sentencia->bind_param("s", $usuario);
             $sentencia->bind_result($this->nombre, $this->contrasenia);
             $sentencia->execute();
 
 
             if($sentencia->fetch()){
-                $toRet=true;
+                if(strcmp(strtolower($this->nombre), $usuario)==0 && strcmp($this->contrasenia, $contrasenia)==0){ //los comparo haciendo un strtolower al nombre para que el nombre no sea case sensitive
+                    $toRet=true;
+                }
             }
 
             $sentencia->close();
@@ -70,7 +72,7 @@
             return $toRet;
         }
 
-        public function admin($id){
+        public function admin($id){ //return true o false si el usuario es admin
             $sql = "SELECT admin FROM usuarios WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("s", $id);
@@ -85,7 +87,7 @@
             return $toRet;
         }
 
-        public function insertar_usuario(){
+        public function insertar_usuario(){ //inserta un usuario, devuelve true o false
             $toRet=true;
             try{
                 $sql = "INSERT INTO usuarios (nombre, contrasenia) VALUES (?, ?)";
@@ -100,7 +102,7 @@
             return $toRet;
         }
 
-        public function buscar_usuario($buscar){
+        public function buscar_usuario($buscar){ //Return array de usuarios con un filtro
             $sql = "SELECT * FROM usuarios WHERE nombre like ?";
             $buscar="%".$buscar."%";
             $sentencia = $this->bd->prepare($sql);
@@ -116,7 +118,7 @@
             return $usuarios;
         }
 
-        public function get_usuario($id){
+        public function get_usuario($id){ //Return de un usuario dando un id
             $sql = "SELECT * FROM usuarios WHERE id = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $id);
@@ -128,7 +130,7 @@
             return $usuario;
         }
 
-        public function modificar_usuario(){
+        public function modificar_usuario(){ //modifica un usuario, devuelve true o false
             $toRet=true;
             try{
                 if($this->contrasenia!=null){

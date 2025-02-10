@@ -26,7 +26,7 @@
                     <?php
                         if(isset($_GET["err"])){
                             if($_GET["err"] == 1){
-                                echo '<p style="color:red">Usuario o Contraseña incorrectos</p>';
+                                echo '<div class="mensaje"><p style="color:red">Usuario o Contraseña incorrectos</p></div>';
                             }
                             header("refresh: 2; url= index.php");
                         }
@@ -36,5 +36,5 @@
                 <input type="submit" name="action" value="Iniciar" class="boton">
             </form>
         </div>
-    </body>
-</html>>
+    </div>
+<?php require_once("../vista/fin.html");?>
